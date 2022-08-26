@@ -1,1 +1,8 @@
 tests/*/results.json
+tests/anagram-all-fail/anagram-all-fail
+tests/anagram-partial-fail/anagram-partial-fail
+tests/anagram-success/anagram-success
+tests/anagram-all-fail/results.json
+tests/anagram-partial-fail/results.json
+tests/anagram-success/results.json
+tests/anagram-syntax-error/results.json

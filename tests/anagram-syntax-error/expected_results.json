@@ -1,0 +1,5 @@
+{
+  "message": "Building builtin -> /root/.local/share/ponyup/ponyc-release-0.51.1-x86_64-linux-musl/packages/builtinBuilding . -> /opt/test-runner/tests/anagram-syntax-errorBuilding pony_test -> /root/.local/share/ponyup/ponyc-release-0.51.1-x86_64-linux-musl/packages/pony_testBuilding time -> /root/.local/share/ponyup/ponyc-release-0.51.1-x86_64-linux-musl/packages/timeBuilding collections -> /root/.local/share/ponyup/ponyc-release-0.51.1-x86_64-linux-musl/packages/collectionsBuilding random -> /root/.local/share/ponyup/ponyc-release-0.51.1-x86_64-linux-musl/packages/randomError:/opt/test-runner/tests/anagram-syntax-error/test.pony:4:19: definition of 'env' is not a type  new create(env: env) =>                  ^",
+  "status": "error",
+  "version": 3
+}
