@@ -112,12 +112,20 @@ actor Main
       let linenum: USize = rarray.shift()?.usize()?
       try
         mainjsonobj.data("status") = "fail"
-        jsonobj.data("version") = I64(2)
         jsonobj.data("status") = "fail"
-        jsonobj.data("name") = test_source.apply(linenum - 2)?
-        jsonobj.data("test_code") = test_source.apply(linenum - 1)?
-        jsonobj.data("message") = ":".join(rarray.values())
+        jsonobj.data("name") = strip_comment(test_source.apply(linenum - 2)?)
+        jsonobj.data("test_code") = test_source.apply(linenum - 1)?.clone().>lstrip()
+        jsonobj.data("message") = ":".join(rarray.values()).>lstrip()
       end
     end
     jsonobj
+
+  fun strip_comment(str: String): String =>
+    try
+      let idx: ISize = str.find("// ")?
+      str.substring(idx+3)
+    else
+      str
+    end
+
 

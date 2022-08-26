@@ -16,11 +16,10 @@
       "name": "    // Anagram shouldn't be based on checksum"
     },
     {
-      "test_code": "    h.assert_array_eq[String]([\"Sent\"], Anagram(\"nets\", anagrams))",
-      "message": " Assert EQ failed.  Expected ([len=1: Sent]) == ([len=1: sent])",
+      "test_code": "h.assert_array_eq[String]([\"Sent\"], Anagram(\"nets\", anagrams))",
+      "message": "Assert EQ failed.  Expected ([len=1: Sent]) == ([len=1: sent])",
       "status": "fail",
-      "version": 2,
-      "name": "    // Anagram should return an array of anagrams if present"
+      "name": "Anagram should return an array of anagrams if present"
     },
     {
       "test_code": "    h.assert_array_eq[String]([\"sent\"], Anagram(\"nETs\", anagrams))",
