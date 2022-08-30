@@ -1,46 +1,40 @@
 {
   "tests": [
     {
-      "test_code": "    h.assert_array_eq[String](failme, Anagram(\"bobs\", anagrams))",
-      "message": " Assert EQ failed.  Expected ([len=1: failme]) == ([len=0: ])",
+      "test_code": "h.assert_array_eq[String](failme, Anagram(\"bobs\", anagrams))",
+      "message": "Assert EQ failed.  Expected ([len=1: failme]) == ([len=0: ])",
       "status": "fail",
-      "version": 2,
-      "name": "    // Anagram should return an empty array if there are no anagrams"
+      "name": "Anagram should return an empty array if there are no anagrams"
     },
     {
-      "test_code": "    h.assert_array_eq[String](failme, Anagram(\"banana\", anagrams))",
-      "message": " Assert EQ failed.  Expected ([len=1: failme]) == ([len=0: ])",
+      "test_code": "h.assert_array_eq[String](failme, Anagram(\"banana\", anagrams))",
+      "message": "Assert EQ failed.  Expected ([len=1: failme]) == ([len=0: ])",
       "status": "fail",
-      "version": 2,
-      "name": "    // Anagram should ignore same words, those aren't anagrams"
+      "name": "Anagram should ignore same words, those aren't anagrams"
     },
     {
-      "test_code": "    h.assert_array_eq[String](failme, Anagram(\"last\", [\"mass\"]))",
-      "message": " Assert EQ failed.  Expected ([len=1: failme]) == ([len=0: ])",
+      "test_code": "h.assert_array_eq[String](failme, Anagram(\"last\", [\"mass\"]))",
+      "message": "Assert EQ failed.  Expected ([len=1: failme]) == ([len=0: ])",
       "status": "fail",
-      "version": 2,
-      "name": "    // Anagram shouldn't be based on checksum"
+      "name": "Anagram shouldn't be based on checksum"
     },
     {
-      "test_code": "    h.assert_array_eq[String](failme, Anagram(\"nets\", anagrams))",
-      "message": " Assert EQ failed.  Expected ([len=1: failme]) == ([len=1: sent])",
+      "test_code": "h.assert_array_eq[String](failme, Anagram(\"nets\", anagrams))",
+      "message": "Assert EQ failed.  Expected ([len=1: failme]) == ([len=1: sent])",
       "status": "fail",
-      "version": 2,
-      "name": "    // Anagram should return an array of anagrams if present"
+      "name": "Anagram should return an array of anagrams if present"
     },
     {
-      "test_code": "    h.assert_array_eq[String](failme, Anagram(\"nETs\", anagrams))",
-      "message": " Assert EQ failed.  Expected ([len=1: failme]) == ([len=1: sent])",
+      "test_code": "h.assert_array_eq[String](failme, Anagram(\"nETs\", anagrams))",
+      "message": "Assert EQ failed.  Expected ([len=1: failme]) == ([len=1: sent])",
       "status": "fail",
-      "version": 2,
-      "name": "    // Anagram should be case insensitive"
+      "name": "Anagram should be case insensitive"
     },
     {
-      "test_code": "    h.assert_array_eq[String](failme, Anagram(\"seal\", anagrams))",
-      "message": " Assert EQ failed.  Expected ([len=1: failme]) == ([len=2: sale, ales])",
+      "test_code": "h.assert_array_eq[String](failme, Anagram(\"seal\", anagrams))",
+      "message": "Assert EQ failed.  Expected ([len=1: failme]) == ([len=2: sale, ales])",
       "status": "fail",
-      "version": 2,
-      "name": "    // Anagram should return multiple anagrams"
+      "name": "Anagram should return multiple anagrams"
     }
   ],
   "status": "fail",

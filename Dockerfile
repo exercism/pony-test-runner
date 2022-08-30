@@ -1,6 +1,6 @@
 ## Using the Official Ponylang Docker Images
-ARG FROM_TAG=release
-FROM ponylang/shared-docker-ci-x86-64-unknown-linux-builder:${FROM_TAG}
+ARG FROM_TAG=0.51.1-alpine
+FROM ponylang/ponyc:${FROM_TAG}
 
 WORKDIR /opt/test-runner
 
