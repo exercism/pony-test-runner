@@ -7,7 +7,9 @@ actor Main
 
   new create(env': Env) =>
     env = env'
+    env.out.print("Hello World")
 
+    /*
     let compile_error_file: FilePath = FilePath(FileAuth(env.root), compile_outpath())
 
     try
@@ -51,3 +53,5 @@ actor Main
 
     env.out.print(doc.string(where indent="  ", pretty_print=true))
 //      @exit(0)
+
+*/
