@@ -1,6 +1,6 @@
 ## Using the Official Ponylang Docker Images
-ARG FROM_TAG=0.51.1-alpine
-FROM ponylang/ponyc:${FROM_TAG}
+ARG FROM_TAG=release
+FROM ghcr.io/ponylang/ponyc:${FROM_TAG}
 
 WORKDIR /opt/test-runner
 

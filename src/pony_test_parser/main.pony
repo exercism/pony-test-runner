@@ -3,6 +3,12 @@ use "files"
 
 actor Main
   let env: Env
+
+  new create(env': Env) =>
+    env = env'
+    env.out.print("Hello World")
+
+  /*
   let test_source: Array[String] trn = recover trn [] end
   let jdoc: JsonDoc = JsonDoc
   let mainjsonobj: JsonObject = JsonObject
@@ -128,4 +134,4 @@ actor Main
       str
     end
 
-
+*/
