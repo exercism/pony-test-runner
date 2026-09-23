@@ -1,4 +1,3 @@
 tests/*/results.json
-tests/anagram-all-fail/anagram-all-fail
-tests/anagram-partial-fail/anagram-partial-fail
-tests/anagram-success/anagram-success
+bin/pony_test_parser
+src/Makefile
