@@ -1,0 +1,37 @@
+{
+  "tests": [
+    {
+      "status": "pass",
+      "test_code": "h.assert_array_eq[String](empty, Anagram(\"bobs\", anagrams))",
+      "name": "Anagram should return an empty array if there are no anagrams"
+    },
+    {
+      "status": "pass",
+      "test_code": "h.assert_array_eq[String](empty, Anagram(\"banana\", anagrams))",
+      "name": "Anagram should ignore same words, those aren't anagrams"
+    },
+    {
+      "status": "pass",
+      "test_code": "h.assert_array_eq[String](empty, Anagram(\"last\", [\"mass\"]))",
+      "name": "Anagram shouldn't be based on checksum"
+    },
+    {
+      "status": "fail",
+      "test_code": "h.assert_array_eq[String]([\"Sent\"], Anagram(\"nets\", anagrams))",
+      "message": "Assert EQ failed.  Expected ([len=1: Sent]) == ([len=1: sent])",
+      "name": "Anagram should return an array of anagrams if present"
+    },
+    {
+      "status": "pass",
+      "test_code": "h.assert_array_eq[String]([\"sent\"], Anagram(\"nETs\", anagrams))",
+      "name": "Anagram should be case insensitive"
+    },
+    {
+      "status": "pass",
+      "test_code": "h.assert_array_eq[String]([\"sale\"; \"ales\"], Anagram(\"seal\", anagrams))",
+      "name": "Anagram should return multiple anagrams"
+    }
+  ],
+  "status": "fail",
+  "version": 2
+}
