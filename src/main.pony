@@ -10,7 +10,6 @@ actor Main
   let test_source: Array[String] trn = recover trn [] end
   let exercism_version: I64 = 2
   var slug: String
-  var workdir: String
   var inputdir: String
   var outputdir: String
   var tps: Array[String val] = Array[String val]
@@ -18,16 +17,14 @@ actor Main
 
   new create(env': Env) =>
 		env = env'
-    slug = try env.args(1)? else "/noworkdir" end
-    workdir = try env.args(2)? else "/noworkdir" end
-    inputdir = try env.args(3)? else "/noinputdir" end
-    outputdir = try env.args(4)? else "/nooutputdir" end
+    slug = try env.args(1)? else "/noslug" end
+    inputdir = try env.args(2)? else "/noinputdir" end
+    outputdir = try env.args(3)? else "/nooutputdir" end
     
-    Debug.out("Workdir: " + workdir)
     Debug.out("InputDir: " + inputdir)
     Debug.out("OutputDir: " + outputdir)
 
-    match OpenFile(FilePath(FileAuth(env.root), workdir + "/test.pony"))
+    match OpenFile(FilePath(FileAuth(env.root), inputdir + "/test.pony"))
     | let file: File => Debug.out("test.pony file found")
       for line in file.lines() do
         tps.push(consume line)
@@ -36,18 +33,18 @@ actor Main
     end
 
     // Test if the compilation output exists…
-    var execfp: FilePath = FilePath(FileAuth(env.root), workdir + "/" + slug)
+    var execfp: FilePath = FilePath(FileAuth(env.root), outputdir + "/" + slug)
     if (execfp.exists()) then
-      Debug.out(workdir + "/" + slug + " exists")
+      Debug.out(outputdir + "/" + slug + " exists")
       go_execution()
     else
-      Debug.out(workdir + "/" + slug + " does NOT exist")
+      Debug.out(outputdir + "/" + slug + " does NOT exist")
       compilation_failure()
     end
 
   fun compilation_failure() =>
-    let coutfp: FilePath = FilePath(FileAuth(env.root), workdir + "/" + "compile.stdout")
-    let cerrfp: FilePath = FilePath(FileAuth(env.root), workdir + "/" + "compile.stderr")
+    let coutfp: FilePath = FilePath(FileAuth(env.root), outputdir + "/" + "compile.stdout")
+    let cerrfp: FilePath = FilePath(FileAuth(env.root), outputdir + "/" + "compile.stderr")
 
     var compout: String trn = recover iso String end
     if (coutfp.exists()) then
@@ -79,7 +76,7 @@ actor Main
 
   fun ref go_execution() => None
     let notifier: ProcessNotify iso = ProcessRunner(this)
-    let fp: FilePath = FilePath(FileAuth(env.root), workdir + "/" + slug)
+    let fp: FilePath = FilePath(FileAuth(env.root), outputdir + "/" + slug)
     let args: Array[String] val = [slug; "--verbose"]
 
     match StartProcess(StartProcessAuth(env.root), ApplyReleaseBackpressureAuth(env.root), consume notifier, fp, args, env.vars)
@@ -171,86 +168,3 @@ actor Main
     else
       str
     end
-//		let pony_test_results_file: FilePath = FilePath(FileAuth(env.root), compile_outpath())
-//		let ponytest_source_file: FilePath = FilePath(FileAuth(env.root), compile_testpony())
-//
-//    let doc: JSONObject = JSONObject
-//      .update("version", exercism_version)
-//      .update("status", "pass")
-
-
- //   env.out.print(JSONPrinter.pretty(doc))
-    /*
-    try
-			if (not pony_test_results_file.exists()) then
-				fatal_error("error: We were unable to find any output from our tests - please raise an issue on exercism/pony-test-runner")
-				error
-			end
-			if (not ponytest_source_file.exists()) then
-				fatal_error("error: We were unable to find the test.pony file for your exercise - please raise an issue on exercism/pony-test-runner")
-				error
-			end
-
-      let srclines: FileLines = File(ponytest_source_file).lines()
-      for srcline in srclines do
-        test_source.push(consume srcline)
-      end
-
-      let result_lines: FileLines = File(pony_test_results_file).lines()
-
-      let jsonresults: Array[JsonType] = Array[JsonType]
-
-      for result_line in result_lines do
-        let res: String val = consume result_line
-        if (res.contains("Assert")) then
-          if (res.contains(" passed.  Got ")) then
-            jsonresults.push(pass(res))
-            continue
-          end
-          if (res.contains(" failed.  Expected ")) then
-            jsonresults.push(fail(res))
-            continue
-          end
-          fatal_error(res)
-        end
-      end
-      mainjsonobj.data("tests") = JsonArray.from_array(jsonresults)
-      jdoc.data = mainjsonobj
-      env.out.print(jdoc.string(where indent="  ", pretty_print=true))
-		end
-
-  fun pass(str: String): JsonObject =>
-    let jsonobj: JsonObject = JsonObject
-    let rarray: Array[String] = str.split_by(":")
-    var remainder: String = ""
-
-    try
-      let filename: String = rarray.shift()?
-      let linenum: USize = rarray.shift()?.usize()?
-      try
-        jsonobj.data("status") = "pass"
-        jsonobj.data("name") = test_source.apply(linenum - 2)?
-        jsonobj.data("test_code") = test_source.apply(linenum - 1)?
-      end
-    end
-    jsonobj
-
-  fun ref fail(str: String): JsonObject =>
-    let jsonobj: JsonObject = JsonObject
-    let rarray: Array[String] = str.split_by(":")
-    var remainder: String = ""
-
-    try
-      let filename: String = rarray.shift()?
-      let linenum: USize = rarray.shift()?.usize()?
-      try
-        mainjsonobj.data("status") = "fail"
-        jsonobj.data("status") = "fail"
-        jsonobj.data("name") = strip_comment(test_source.apply(linenum - 2)?)
-        jsonobj.data("test_code") = test_source.apply(linenum - 1)?.clone().>lstrip()
-        jsonobj.data("message") = ":".join(rarray.values()).>lstrip()
-      end
-    end
-    jsonobj
-
-*/
